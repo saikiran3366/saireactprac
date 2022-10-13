@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import login from "../Assets/login.jpg";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -123,8 +124,19 @@ export default function Login() {
                 Login
               </Button>
             </Grid>
-            <Grid container item={12} style={{ justifyContent: "flex-end" }}>
-              <h4 style={{ margin: 0, width: "42%", justifyContent: "flex-end" }}>Forgot Password ..!</h4>
+
+            <Grid container item={12} style={{ justifyContent: "center" }}>
+              <Link to="/signUp" style={{ textDecoration: "none" }}>
+                <h5
+                  style={{
+                    margin: 0,
+                    width: "100%",
+                    cursor: "pointer",
+                  }}
+                >
+                  SignUp Now..!
+                </h5>
+              </Link>
             </Grid>
           </Grid>
         </Grid>
