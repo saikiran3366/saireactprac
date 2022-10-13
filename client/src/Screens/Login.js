@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import login from "../Assets/login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState("");
 
   const handleSubmit = () => {
     console.log(email, password, checked, "hello");
+
+    setEmail("");
+    setPassword("");
+    setChecked("");
+    navigate("/Home");
   };
 
   return (
@@ -76,8 +82,8 @@ export default function Login() {
               }}
             >
               <TextField
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 id="outlined-basic"
                 label="Enter Email"
                 size="medium"
@@ -98,8 +104,9 @@ export default function Login() {
               }}
             >
               <TextField
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 id="outlined-basic"
                 label="Enter Password"
                 size="medium"
@@ -124,12 +131,26 @@ export default function Login() {
               <h3 style={{ paddingLeft: 10 }}>Remember Me</h3>
             </Grid>
             <Grid container item={12} style={{ justifyContent: "center", marginTop: 20 }}>
-              <Button
-                onClick={handleSubmit}
-                style={{ backgroundColor: "purple", width: "60%", height: "50px", color: "white", fontWeight: "bold" }}
-              >
-                Login
-              </Button>
+              {(email === "sai" && password === "sai") || (email === "123" && password === "123") ? (
+                <Button
+                  onClick={handleSubmit}
+                  style={{
+                    backgroundColor: "purple",
+                    width: "60%",
+                    height: "50px",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Login
+                </Button>
+              ) : (
+                <Button
+                  style={{ backgroundColor: "grey", width: "60%", height: "50px", color: "white", fontWeight: "bold" }}
+                >
+                  Pls Fill Valid Credentials
+                </Button>
+              )}
             </Grid>
 
             <Grid container item={12} style={{ justifyContent: "center" }}>

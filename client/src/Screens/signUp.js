@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Snackbar, Alert, AlertTitle } from "@mui/material";
 import login from "../Assets/login.jpg";
 import { Link } from "react-router-dom";
 import Radio from "@mui/material/Radio";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,17 +21,22 @@ export default function SignUp() {
   const [radio, setRadio] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(name, email, password, cpwd, mobile, dob, address, radio);
+    if (name != "" && email != "" && password != "") {
+      e.preventDefault();
+      console.log(name, email, password, cpwd, mobile, dob, address, radio);
 
-    setName("");
-    setEmail("");
-    setPassword("");
-    setCpwd("");
-    setMobile("");
-    setDob("");
-    setAddress("");
-    setRadio("");
+      alert("Registration Success");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setCpwd("");
+      setMobile("");
+      setDob("");
+      setAddress("");
+      setRadio("");
+
+      navigate("/");
+    }
   };
 
   return (
@@ -45,11 +52,11 @@ export default function SignUp() {
           alignItems: "center",
         }}
       >
-        <Grid container item lg={8} style={{ height: 800, width: "100%" }}>
+        <Grid container item lg={5} style={{ height: 800, width: "100%", backgroundColor: "blue" }}>
           <Grid
             container
             item
-            lg={6}
+            lg={12}
             style={{
               height: "100%",
               width: "100%",
@@ -253,23 +260,43 @@ export default function SignUp() {
               </Grid>
 
               <Grid container item={12} style={{ justifyContent: "center", marginTop: 30 }}>
-                <Button
-                  // onClick={handleSubmit}
-                  type="submit"
-                  style={{
-                    backgroundColor: "purple",
-                    width: "30%",
-                    height: "40px",
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Submit
-                </Button>
+                {name != "" && email != "" && password != "" ? (
+                  <Button
+                    type="submit"
+                    style={{
+                      backgroundColor: "purple",
+                      width: "30%",
+                      height: "40px",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    style={{
+                      backgroundColor: "grey",
+                      width: "30%",
+                      height: "40px",
+                      color: "white",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Submit
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </Grid>
-          <Grid
+        </Grid>
+      </Grid>
+    </form>
+  );
+}
+
+{
+  /* <Grid
             container
             alignContent={"flex-start"}
             item
@@ -291,9 +318,102 @@ export default function SignUp() {
             <Grid container item={12} style={{ justifyContent: "center", alignItems: "center" }}>
               <Grid container item={12} style={{ height: 2, backgroundColor: "lightgrey", width: "70%" }}></Grid>
             </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </form>
-  );
+            <Grid
+              container
+              item
+              lg={12}
+              style={{ height: "12%", width: "100%", justifyContent: "center", paddingTop: 20 }}
+            >
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Name</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{name}</h4>
+                </Grid>
+              </Grid>
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Email</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{email}</h4>
+                </Grid>
+              </Grid>
+
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Psssword</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{password}</h4>
+                </Grid>
+              </Grid>
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Confirm Pwd</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{cpwd}</h4>
+                </Grid>
+              </Grid>
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Mobile</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{mobile}</h4>
+                </Grid>
+              </Grid>
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Date of Birth</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{dob}</h4>
+                </Grid>
+              </Grid>
+
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Gender</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h4>{radio}</h4>
+                </Grid>
+              </Grid>
+              <Grid container item lg={10} style={{ height: "100%", width: "70%" }}>
+                <Grid container item lg={3} style={{ height: "100%" }}>
+                  <h4>Address</h4>
+                </Grid>
+                <Grid container item lg={0.5} style={{ height: "100%" }}>
+                  <h4>:</h4>
+                </Grid>
+                <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
+                  <h3>{address}</h3>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid> */
 }
