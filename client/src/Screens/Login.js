@@ -118,7 +118,9 @@ export default function Login() {
                 paddingLeft: 125,
               }}
             >
-              <input type="checkbox" value={checked} onChange={(e) => setChecked(!checked)}></input>
+              <input type="checkbox" value={checked} onChange={(e) => setChecked(e.target.checked)}></input>
+
+              {/* setChecked(!checked) */}
               <h3 style={{ paddingLeft: 10 }}>Remember Me</h3>
             </Grid>
             <Grid container item={12} style={{ justifyContent: "center", marginTop: 20 }}>

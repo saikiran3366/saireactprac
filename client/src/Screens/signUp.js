@@ -16,9 +16,19 @@ export default function SignUp() {
   const [mobile, setMobile] = useState("");
   const [dob, setDob] = useState("");
   const [address, setAddress] = useState("");
+  const [radio, setRadio] = useState("");
 
   const handleSubmit = () => {
-    console.log(name, email, password, cpwd, mobile, dob, address);
+    console.log(name, email, password, cpwd, mobile, dob, address, radio);
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    setCpwd("");
+    setMobile("");
+    setDob("");
+    setAddress("");
+    setRadio("");
   };
 
   return (
@@ -115,6 +125,7 @@ export default function SignUp() {
               </Grid>
               <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
                 <TextField
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   id="outlined-basic"
@@ -134,6 +145,7 @@ export default function SignUp() {
               </Grid>
               <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
                 <TextField
+                  type="password"
                   value={cpwd}
                   onChange={(e) => setCpwd(e.target.value)}
                   id="outlined-basic"
@@ -153,6 +165,7 @@ export default function SignUp() {
               </Grid>
               <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
                 <TextField
+                  type="number"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
                   id="outlined-basic"
@@ -172,12 +185,13 @@ export default function SignUp() {
               </Grid>
               <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
                 <TextField
+                  autoFocus={true}
+                  type="month"
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
                   id="outlined-basic"
                   label="Date Of Birth"
                   size="small"
-                  variant="outlined"
                   style={{ width: "80%" }}
                 />
               </Grid>
@@ -193,9 +207,24 @@ export default function SignUp() {
               <Grid container item lg={8.5} style={{ height: "100%", alignItems: "center" }}>
                 <FormControl>
                   <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                    <FormControlLabel value="female" control={<Radio />} label="Female" />
-                    <FormControlLabel value="male" control={<Radio />} label="Male" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
+                    <FormControlLabel
+                      value="Female"
+                      onChange={(e) => setRadio(e.target.value)}
+                      control={<Radio checked={radio === "Female"} />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      onChange={(e) => setRadio(e.target.value)}
+                      control={<Radio checked={radio === "male"} />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="other"
+                      onChange={(e) => setRadio(e.target.value)}
+                      control={<Radio checked={radio === "other"} />}
+                      label="Other"
+                    />
                   </RadioGroup>
                 </FormControl>
               </Grid>
