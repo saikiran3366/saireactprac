@@ -6,8 +6,12 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checked, setChecked] = useState("");
 
-  console.log(email, password, "hello");
+  const handleSubmit = () => {
+    console.log(email, password, checked, "hello");
+  };
+
   return (
     <Grid
       container
@@ -20,7 +24,7 @@ export default function Login() {
         alignItems: "center",
       }}
     >
-      <Grid container item lg={8} style={{ height: "60vh", width: "100%" }}>
+      <Grid container item lg={8} style={{ height: 600, width: "100%" }}>
         <Grid
           container
           item
@@ -114,11 +118,12 @@ export default function Login() {
                 paddingLeft: 125,
               }}
             >
-              <input type="checkbox"></input>
+              <input type="checkbox" value={checked} onChange={(e) => setChecked(!checked)}></input>
               <h3 style={{ paddingLeft: 10 }}>Remember Me</h3>
             </Grid>
             <Grid container item={12} style={{ justifyContent: "center", marginTop: 20 }}>
               <Button
+                onClick={handleSubmit}
                 style={{ backgroundColor: "purple", width: "60%", height: "50px", color: "white", fontWeight: "bold" }}
               >
                 Login
